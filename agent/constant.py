@@ -1,0 +1,1 @@
+GOOGLE_LLM_MODEL_NAME = "gemini-3.5-flash-lite"
