@@ -7,6 +7,11 @@ from datetime import date
 
 load_dotenv()
 
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s | %(levelname)s | %(message)s"
+)
+
 
 @tool
 def get_user_purchase_history(user: str) -> dict:
@@ -46,7 +51,6 @@ def get_today_date(user: str) -> str:
     """this tool will return the today's date"""
     logging.info(f"using the get_today_date tools on user: {user}")
     return str(date.today())
-
 
 # book = PurchaseItem(name="book")
 # pen = PurchaseItem(name="pen")
