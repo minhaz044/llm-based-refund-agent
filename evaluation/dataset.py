@@ -61,7 +61,6 @@ dataset = EvaluationDataset(
             expected_output="No refund was given , because user didn't purchased the item",
             expected_tools=[
                 ToolCall(name="get_user_purchase_history")
-
             ]
         )
     ]
