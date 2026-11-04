@@ -34,7 +34,6 @@ as long as no refund ticket were issued
 metrics = StepEfficiencyMetric(
     model=llm,
     threshold=0.8,
-    task=SUCCESSFUL_TASK_DESCRIPTION,
     include_reason=True
 )
 
