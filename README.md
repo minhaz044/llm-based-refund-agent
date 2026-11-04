@@ -38,8 +38,15 @@ agent/
   constant.py    # Model name constant
   data.py        # Mock user purchase data
 evaluation/
-  dataset.py         # DeepEval goldens for refund scenarios
-  task_completion.py # Task-completion evaluation entry point
+  dataset.py             # DeepEval goldens for refund scenarios
+  model.py               # Gemini model used to grade the evaluations
+  task_completion.py     # Task-completion metric
+  tool_correctness.py    # Tool-correctness metric
+  argument_correctness.py # Argument-correctness metric
+  answer_correctness.py  # Answer-correctness metric (custom GEval)
+  plan_adherence.py      # Plan-adherence metric
+  plan_quality.py        # Plan-quality metric
+  step_efficiency.py     # Step-efficiency metric
 ```
 
 ## Tools
@@ -73,7 +80,8 @@ evaluation/
 
 ## Running
 
-The agent runs an interactive terminal conversation:
+The interactive terminal conversation lives in `run_conversation()` inside
+`agent/agent.py` (it is defined but not called by default). Enable it and run:
 
 ```bash
 cd agent
@@ -85,9 +93,25 @@ confirmation when asked.
 
 ## Evaluation
 
-The `evaluation/` directory contains a [DeepEval](https://docs.confident-ai.com/) dataset of
-golden scenarios covering eligible refunds, out-of-window purchases, unknown users, and
-non-purchased items, each with expected tools and outputs.
+The `evaluation/` directory contains a [DeepEval](https://docs.confident-ai.com/) suite. The
+golden scenarios in `dataset.py` cover eligible refunds, out-of-window purchases, unknown
+users, non-purchased items, informational-only requests, and mixed eligible/ineligible
+carts, each with expected tools and outputs. `evaluation/model.py` supplies the Gemini model
+that grades the runs.
+
+Each script runs the agent against every golden and scores it with a different metric:
+
+| Script | Metric |
+| --- | --- |
+| `task_completion.py` | `TaskCompletionMetric` — did the agent complete the refund task? |
+| `tool_correctness.py` | `ToolCorrectnessMetric` — were the right tools called? |
+| `argument_correctness.py` | `ArgumentCorrectnessMetric` — were tool arguments correct? |
+| `answer_correctness.py` | Custom `GEval` — does the answer match the expected output? |
+| `plan_adherence.py` | `PlanAdherenceMetric` — did the agent follow the plan? |
+| `plan_quality.py` | `PlanQualityMetric` — was the plan itself sound? |
+| `step_efficiency.py` | `StepEfficiencyMetric` — were the steps efficient? |
+
+Run any single evaluation from the project root, for example:
 
 ```bash
 python evaluation/task_completion.py
