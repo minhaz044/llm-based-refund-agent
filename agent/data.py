@@ -1,4 +1,14 @@
 users_data = {
+    "user122": {
+        "book": {
+            "price": 23,
+            "date": "2026-08-5"
+        },
+        "pen": {
+            "price": 7,
+            "date": "2026-08-3"
+        }
+    },
     "user123": {
         "book": {
             "price": 23,

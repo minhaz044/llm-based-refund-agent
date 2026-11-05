@@ -90,7 +90,7 @@ def build_metrics():
 def main():
     load_dotenv()
     sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "agent"))
-    from agent import agent
+    from agent.agent import agent
 
     trace_metrics, single_turn_metrics = build_metrics()
     cache_config = CacheConfig(use_cache=True, write_cache=False)

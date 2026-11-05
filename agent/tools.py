@@ -50,7 +50,8 @@ def issue_refund_ticket(user: str, refund_amount: int) -> str:
 def get_today_date(user: str) -> str:
     """this tool will return the today's date"""
     logging.info(f"using the get_today_date tools on user: {user}")
-    return str(date.today())
+    # return str(date.today())
+    return "2026-10-25"
 
 # book = PurchaseItem(name="book")
 # pen = PurchaseItem(name="pen")

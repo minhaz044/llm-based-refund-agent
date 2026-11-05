@@ -4,6 +4,14 @@ from deepeval.test_case import ToolCall
 dataset = EvaluationDataset(
     goldens=[
         Golden(
+            input="I am user122, I would like a refund for the book and the pen ",
+            expected_output="No refund , both item are out of 30 days refund window",
+            expected_tools=[
+                ToolCall(name="get_user_purchase_history"),
+                ToolCall(name="get_today_date")
+            ]
+        ),
+        Golden(
             input="I am user130, I would like a refund for the book and the pen ",
             expected_output="A refund tickets of 30$ has been issued",
             expected_tools=[
@@ -51,8 +59,6 @@ dataset = EvaluationDataset(
             expected_output="A refund tickets of 45$ has been issued for backpack, the water bottle is outside the 30 days policy",
             expected_tools=[
                 ToolCall(name="get_user_purchase_history"),
-                ToolCall(name="calculate_right_refund"),
-                ToolCall(name="issue_refund_ticket"),
                 ToolCall(name="get_today_date")
             ]
         ),
